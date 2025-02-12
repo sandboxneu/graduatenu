@@ -27,6 +27,10 @@ export class CreatePlanDtoWithoutSchedule {
 
   @IsString()
   @IsOptional()
+  minor?: string;
+
+  @IsString()
+  @IsOptional()
   concentration?: string;
 
   @IsInt()
@@ -57,6 +61,10 @@ export class UpdatePlanDto {
   @IsOptional()
   @IsString()
   major?: string;
+
+  @IsOptional()
+  @IsString()
+  minor?: string;
 
   @IsOptional()
   @IsString()
@@ -124,6 +132,10 @@ export class UpdateStudentDto {
 
   @IsOptional()
   @IsString()
+  minor?: string;
+
+  @IsOptional()
+  @IsString()
   coopCycle?: string;
 
   @IsOptional()
@@ -172,6 +184,9 @@ export class OnboardStudentDto {
 
   @IsString()
   major: string;
+
+  @IsString()
+  minor: string;
 
   @IsString()
   coopCycle: string;

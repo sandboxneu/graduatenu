@@ -29,9 +29,11 @@ import {
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
   useSupportedMajors,
+  useSupportedMinors,
 } from "../../hooks";
 import {
   extractSupportedMajorOptions,
+  extractSupportedMinorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -49,6 +51,7 @@ type EditPlanModalProps = {
 type EditPlanInput = {
   name: string;
   major: string;
+  minor?: string;
   catalogYear: number;
   concentration: string;
   agreeToBetaMajor: boolean;
@@ -57,6 +60,8 @@ type EditPlanInput = {
 export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
+  const { supportedMinorsData, error: supportedMinorsError } =
+    useSupportedMinors();
   const { mutate } = useSWRConfig();
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
@@ -86,6 +91,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       name: plan.name,
       catalogYear: plan.catalogYear,
       major: plan.major,
+      minor: plan.minor,
       concentration: plan.concentration,
     });
 
@@ -102,6 +108,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
+  }
+  if (supportedMinorsError) {
+    handleApiClientError(supportedMinorsError, router);
   }
 
   if (!student) {
@@ -158,6 +167,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
+      minor: payload.minor,
     };
 
     if (isGuest) {
@@ -177,6 +187,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       );
     } else {
       try {
+        console.log("Updating plan", plan.id, newPlan);
         await API.plans.update(plan.id, newPlan);
       } catch (error) {
         handleApiClientError(error as Error, router);
@@ -323,6 +334,19 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         useFuzzySearch
                       />
                     )}
+                    <PlanSelect
+                      label="Minor"
+                      placeholder="Select a Minor"
+                      name="minor"
+                      control={control}
+                      options={extractSupportedMinorOptions(
+                        catalogYear,
+                        supportedMinorsData
+                      )}
+                      isDisabled={!catalogYear}
+                      isSearchable
+                      useFuzzySearch
+                    />
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox

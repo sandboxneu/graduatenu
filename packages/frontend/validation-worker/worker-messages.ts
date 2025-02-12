@@ -1,6 +1,7 @@
 import {
   Major2,
   MajorValidationResult,
+  Minor,
   ScheduleCourse2,
 } from "@graduate/common";
 
@@ -20,6 +21,7 @@ export type Loaded = { type: WorkerMessageType.Loaded };
 
 export interface WorkerPostInfo {
   major: Major2;
+  minor?: Minor;
   taken: ScheduleCourse2<unknown>[];
   concentration?: string;
   requestNumber: number;

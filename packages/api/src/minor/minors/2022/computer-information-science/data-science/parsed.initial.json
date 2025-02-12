@@ -1,0 +1,343 @@
+{
+  "name": "Data Science, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "DS",
+              "classId": 2000,
+              "description": "Programming with Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "DS",
+              "classId": 2001,
+              "description": "Data Science Programming Practicum",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "DS",
+              "classId": 2500,
+              "description": "Intermediate Programming with Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "DS",
+              "classId": 2501,
+              "description": "Lab for DS 2500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "DS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2010,
+          "idRangeEnd": 4989,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Meaningful Minors",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5120,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5330,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6100,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6200,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "GSND"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6350,
+          "subject": "GSND"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5101,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5102,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5301,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4350,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4380,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4390,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4608,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3403,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3515,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "SCHM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5642,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5644,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5639,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6308,
+          "subject": "BINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6309,
+          "subject": "BINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4581,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3916,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 43
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

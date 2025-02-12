@@ -1,0 +1,58 @@
+{
+  "name": "Mathematics",
+  "totalCreditsRequired": 24,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        }
+      ]
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate-Level Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "RANGE",
+      "subject": "MATH",
+      "idRangeStart": 3001,
+      "idRangeEnd": 4699,
+      "exceptions": [
+        {
+          "subject": "MATH",
+          "classId": 4000,
+          "type": "COURSE"
+        }
+      ]
+    }
+  ]
+}

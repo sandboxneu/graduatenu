@@ -1,4 +1,5 @@
 import { Link, Stack, Text } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -11,6 +12,7 @@ import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
+  getAllCoursesInMinor,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -24,7 +26,7 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchCourses, useMajor } from "../../hooks";
+import { useFetchCourses, useMajor, useMinor } from "../../hooks";
 import NUPathSection from "./NUPathSection";
 import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
@@ -83,6 +85,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
       (concentration) => concentration.title === selectedPlan.concentration
     );
 
+    const minorResponse = useMinor(
+      selectedPlan.catalogYear,
+      selectedPlan.minor ?? ""
+    );
+
     const workerRef = useRef<Worker>();
 
     const [validationStatus, setValidationStatus] = useState<
@@ -101,6 +108,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: major,
+        minor: minorResponse.minor,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -157,12 +165,16 @@ const Sidebar: React.FC<SidebarProps> = memo(
     useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
+    const minorCourses = getAllCoursesInMinor(minorResponse.minor);
 
     const {
       courses,
       isLoading: isCoursesLoading,
       error: courseErrors,
-    } = useFetchCourses(majorCourses, selectedPlan.catalogYear);
+    } = useFetchCourses(
+      majorCourses.concat(minorCourses),
+      selectedPlan.catalogYear
+    );
 
     const courseData = createCourseMap(courses, courseErrors);
 
@@ -228,49 +240,139 @@ const Sidebar: React.FC<SidebarProps> = memo(
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
               loading={isCoursesLoading}
             />
-            {major.requirementSections.map((section, index) => {
-              const sectionValidationError: MajorValidationError | undefined =
-                getSectionError(index, validationStatus);
+            <Tabs
+              size="md"
+              variant="enclosed-colored"
+              colorScheme="blue"
+              mt={3}
+            >
+              <TabList
+                display="flex"
+                gap={2}
+                borderBottom="2px solid"
+                borderColor="neutral.200"
+              >
+                <Tab
+                  _selected={{ color: "white", bg: "blue.800" }}
+                  flex="0.4"
+                  ml={4}
+                  p={1}
+                  borderTopRadius="lg"
+                >
+                  Major
+                </Tab>
+                {minorResponse.minor && (
+                  <Tab
+                    _selected={{ color: "white", bg: "blue.800" }}
+                    flex="0.4"
+                    p={1}
+                    borderTopRadius="lg"
+                  >
+                    Minor(s)
+                  </Tab>
+                )}
+              </TabList>
+              <TabPanels>
+                <TabPanel width="100%" p={0} m={0}>
+                  {major.requirementSections.map((section, index) => {
+                    const sectionValidationError:
+                      | MajorValidationError
+                      | undefined = getSectionError(index, validationStatus);
 
-              let sectionValidationStatus = SidebarValidationStatus.Complete;
+                    let sectionValidationStatus =
+                      SidebarValidationStatus.Complete;
 
-              if (validationStatus === undefined) {
-                sectionValidationStatus = SidebarValidationStatus.Loading;
-              } else if (
-                sectionValidationError &&
-                sectionValidationError.type === "SECTION" &&
-                sectionValidationError.maxPossibleChildCount === 0
-              ) {
-                sectionValidationStatus = SidebarValidationStatus.Error;
-              } else if (
-                sectionValidationError &&
-                sectionValidationError.type === "SECTION" &&
-                sectionValidationError.maxPossibleChildCount > 0
-              ) {
-                sectionValidationStatus = SidebarValidationStatus.InProgress;
-              }
+                    if (validationStatus === undefined) {
+                      sectionValidationStatus = SidebarValidationStatus.Loading;
+                    } else if (
+                      sectionValidationError &&
+                      sectionValidationError.type === "SECTION" &&
+                      sectionValidationError.maxPossibleChildCount === 0
+                    ) {
+                      sectionValidationStatus = SidebarValidationStatus.Error;
+                    } else if (
+                      sectionValidationError &&
+                      sectionValidationError.type === "SECTION" &&
+                      sectionValidationError.maxPossibleChildCount > 0
+                    ) {
+                      sectionValidationStatus =
+                        SidebarValidationStatus.InProgress;
+                    }
 
-              return (
-                <SidebarSection
-                  key={section.title}
-                  section={section}
-                  validationStatus={sectionValidationStatus}
-                  courseData={courseData}
-                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
-                  loading={isCoursesLoading}
-                  coursesTaken={coursesTaken}
-                />
-              );
-            })}
-            {concentration && (
-              <SidebarSection
-                validationStatus={concentrationValidationStatus}
-                section={concentration}
-                courseData={courseData}
-                dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
-                coursesTaken={[]}
-              />
-            )}
+                    return (
+                      <SidebarSection
+                        key={section.title}
+                        section={section}
+                        validationStatus={sectionValidationStatus}
+                        courseData={courseData}
+                        dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
+                        loading={isCoursesLoading}
+                        coursesTaken={coursesTaken}
+                      />
+                    );
+                  })}
+
+                  {concentration && (
+                    <SidebarSection
+                      validationStatus={concentrationValidationStatus}
+                      section={concentration}
+                      courseData={courseData}
+                      dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
+                      coursesTaken={[]}
+                    />
+                  )}
+                </TabPanel>
+                <TabPanel width="100%" p={0} m={0}>
+                  {minorResponse.minor && (
+                    <>
+                      <Text>Minor Requirments</Text>
+                      {minorResponse.minor.requirementSections.map(
+                        (section, index) => {
+                          const sectionValidationError:
+                            | MajorValidationError
+                            | undefined = getSectionError(
+                            index,
+                            validationStatus
+                          );
+
+                          let sectionValidationStatus =
+                            SidebarValidationStatus.Complete;
+
+                          if (validationStatus === undefined) {
+                            sectionValidationStatus =
+                              SidebarValidationStatus.Loading;
+                          } else if (
+                            sectionValidationError &&
+                            sectionValidationError.type === "SECTION" &&
+                            sectionValidationError.maxPossibleChildCount === 0
+                          ) {
+                            sectionValidationStatus =
+                              SidebarValidationStatus.Error;
+                          } else if (
+                            sectionValidationError &&
+                            sectionValidationError.type === "SECTION" &&
+                            sectionValidationError.maxPossibleChildCount > 0
+                          ) {
+                            sectionValidationStatus =
+                              SidebarValidationStatus.InProgress;
+                          }
+                          return (
+                            <SidebarSection
+                              key={index}
+                              section={section}
+                              courseData={courseData}
+                              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                              validationStatus={sectionValidationStatus}
+                              coursesTaken={coursesTaken}
+                            ></SidebarSection>
+                          );
+                        }
+                      )}
+                    </>
+                  )}
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </>
         )}
       </SidebarContainer>

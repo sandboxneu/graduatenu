@@ -29,6 +29,9 @@ export class Plan {
   major: string;
 
   @Column({ nullable: true })
+  minor: string;
+
+  @Column({ nullable: true })
   concentration: string;
 
   @Column({ nullable: true, type: "smallint" })

@@ -20,6 +20,7 @@ export class PlanModel<T> {
   catalogYear: number;
   createdAt: Date;
   updatedAt: Date;
+  minor?: string;
 }
 
 export class GetPlanResponse extends PlanModel<null> {}
@@ -37,6 +38,7 @@ export class StudentModel<T> {
   graduateYear: number | undefined;
   catalogYear: number | undefined;
   major: string | undefined;
+  minor?: string | undefined;
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
   coursesTransfered: ScheduleCourse2<null>[] | undefined;

@@ -50,6 +50,9 @@ export class Student {
   major: string;
 
   @Column({ nullable: true })
+  minor: string;
+
+  @Column({ nullable: true })
   coopCycle: string;
 
   @Column({ type: "json", nullable: true })
