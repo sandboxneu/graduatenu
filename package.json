@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "concurrently \"yarn foreach '@graduate/(common|api|frontend|api-client)' run dev\" \"yarn dev:proxy\"",
+    "wdev": "yarn concurrently \"yarn workspaces foreach --parallel --verbose --interlaced run dev\" \"yarn dev:proxy\"",
     "prod": "concurrently \"yarn foreach '@graduate/(common|api|frontend|api-client)' run prod\" \"yarn dev:proxy\"",
     "foreach": "yarn workspaces foreach --parallel --verbose --interlaced --include",
     "dev:proxy": "node infrastructure/develop/dev-proxy.js",

@@ -14,7 +14,7 @@ GraduateNU aims to empower Northeastern students to customize their plan of stud
 
 5. Then run the new version of the application by running `yarn dev` at the root of the project. This starts up a NestJS server + a NextJS frontend + a Proxy. The proxy listens on port [3002](http://localhost:3002/), forwards /api requests to the NestJS server running on port 3001, and all other requests to the frontend running on port 3000.
 
-5a. For Windows machines, run `yarn concurrently "yarn workspaces foreach --parallel --verbose --interlaced run dev" "yarn dev:proxy"` instead of `yarn dev`
+5a. For Windows machines, run `yarn wdev` instead of `yarn dev`
 
 6. Visit [http://localhost:3002](http://localhost:3002/) to view the app.
 
