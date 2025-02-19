@@ -541,6 +541,7 @@
   ],
   "concentrations": {
     "minOptions": 1,
+
     "concentrationOptions": [
       {
         "type": "SECTION",

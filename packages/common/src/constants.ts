@@ -7,3 +7,5 @@ export const wrongPasswordError = "Incorrect Password";
 export const forgotPasswordTokenExpiredError = "Token expired";
 export const unableToSendEmail = "Unable to send email";
 export const emailAlreadyConfirmed = "Email already confirmed";
+export const UNDECIDED_STRING = "Undecided";
+export const UNDECIDED_CONCENTRATION = "Concentration Undecided";

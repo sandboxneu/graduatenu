@@ -11,6 +11,8 @@ import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
+  UNDECIDED_CONCENTRATION,
+  UNDECIDED_STRING,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -209,7 +211,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
     return (
       <SidebarContainer
         title={major.name}
-        subtitle={selectedPlan.concentration}
+        subtitle={
+          selectedPlan.concentration === UNDECIDED_STRING
+            ? UNDECIDED_CONCENTRATION
+            : selectedPlan.concentration
+        }
         creditsTaken={creditsTaken}
         creditsToTake={major.totalCreditsRequired}
         renderCoopBlock

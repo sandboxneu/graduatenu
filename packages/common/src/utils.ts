@@ -1,5 +1,10 @@
 import type { OptionObject } from "./types";
 
+const UNDECIDED_OPTION: OptionObject = {
+  label: "Undecided",
+  value: "Undecided",
+};
+
 /** Does the given password satisfy our minimum criteria for strength? */
 export const isStrongPassword = (password: string): boolean => {
   const containsLettersAndNumbersRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
@@ -36,14 +41,20 @@ export const majorOptionObjectComparator = (
 /**
  * Converts a list of strings or numbers into a list of option objects for the
  * Select component.
+ *
+ * IncludeUndecided: optional parameter specifying whether to include\
+ * "Undecided" as an option
  */
 export const convertToOptionObjects = (
-  options: (string | number)[]
+  options: (string | number)[],
+  includeUndecided = false
 ): OptionObject[] => {
-  return options.map((option) => {
-    return {
-      label: option,
-      value: option,
-    };
-  });
+  const optionObjects = options.map((option) => ({
+    label: option,
+    value: option,
+  }));
+  if (includeUndecided) {
+    optionObjects.unshift(UNDECIDED_OPTION);
+  }
+  return optionObjects;
 };

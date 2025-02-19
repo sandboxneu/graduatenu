@@ -4,8 +4,10 @@ import { BETA_MAJOR_TOOLTIP_MSG } from "../../utils";
 import { HelperToolTip } from "../Help";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import DropdownWarning from "./DropdownWarning";
+import ConcentrationDropdownWarning from "./ConcentrationDropdownWarning";
 import { COOP_BLOCK } from "./Sidebar";
 import { SandboxArea } from "./SandboxArea";
+import { UNDECIDED_CONCENTRATION } from "@graduate/common";
 
 interface SidebarContainerProps {
   title: string;
@@ -61,11 +63,24 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             </Heading>
           </Flex>
           {subtitle && (
-            <Text fontSize="sm" color="primary.blue.dark.main">
+            <Text
+              fontSize="sm"
+              color={
+                subtitle === UNDECIDED_CONCENTRATION
+                  ? "red.500"
+                  : "primary.blue.dark.main"
+              }
+              fontStyle={
+                subtitle === UNDECIDED_CONCENTRATION ? "italic" : "normal"
+              }
+            >
               {subtitle}
             </Text>
           )}
         </Box>
+        {subtitle === "Concentration Undecided" && (
+          <ConcentrationDropdownWarning />
+        )}
         {renderDropdownWarning && <DropdownWarning />}
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
