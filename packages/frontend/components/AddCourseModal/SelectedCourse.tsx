@@ -21,6 +21,7 @@ export const SelectedCourse: React.FC<SelectedCourseProps> = ({
       justifyContent="space-between"
       padding="xs"
       px="sm"
+      py="sm"
       borderRadius="xl"
       border="1px"
       borderColor="neutral.200"
